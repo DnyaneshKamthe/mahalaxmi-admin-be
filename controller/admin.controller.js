@@ -32,7 +32,7 @@ const getOtp = async (req, res) => {
     const response = fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
-      console.log('Response:', data);
+      // console.log('Response:', data);
       // Process the response data here
     })
     .catch(error => {

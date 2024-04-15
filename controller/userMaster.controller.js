@@ -48,7 +48,7 @@ const verifyMobile = async (req, res) => {
         const response = fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-          console.log('Response:', data);
+          // console.log('Response:', data);
           // Process the response data here
         })
         .catch(error => {
@@ -62,7 +62,7 @@ const verifyMobile = async (req, res) => {
           user: newUserWithoutOtp,
         });
       }
-      console.log("idvh")
+      // console.log("idvh")
       const otp = Math.floor(100000 + Math.random() * 900000);
 
       let newUser;
@@ -80,7 +80,7 @@ const verifyMobile = async (req, res) => {
       const response = fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        console.log('Response:', data);
+        // console.log('Response:', data);
         // Process the response data here
       })
       .catch(error => {
@@ -269,7 +269,7 @@ const getAllUserMasters = async (req, res) => {
 const changeGameVersion=async (req,res)=>{
   try {
     const {version}=req.body
-    console.log(version)
+    // console.log(version)
     if(!version){
       return res.status(400).json({ message: 'version is required' })
     }

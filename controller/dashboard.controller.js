@@ -241,7 +241,7 @@ const get_revenue = async (req, res) => {
         if (!admin) {
           return res.status(404).json({ message: "user not found" })
         };
-        console.log(admin)
+        // console.log(admin)
         const credit =admin.creditedAmount;
         const debit =admin.debitedAmount;
         res.status(200).json({
