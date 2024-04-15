@@ -6,7 +6,8 @@ const adminSchema = new mongoose.Schema({
         type: String,
     },
     otp: {
-        type: Number
+        type: Number,
+        default:0,
     },
     availableCoinsToDistribute: {
         type: Number,
