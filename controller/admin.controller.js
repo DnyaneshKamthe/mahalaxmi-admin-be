@@ -17,7 +17,7 @@ const getOtp = async (req, res) => {
       return res.status(400).json({ status: 400, message: "mobile number is required" });
     };
 
-    const user = await AdminModel.create({ mobileNumber: mobileNumber, password: password });
+    const user = await AdminModel.findOne({ mobileNumber: mobileNumber, password: password });
     // if (!user) {
     //     return res.status(404).json({ status: 404, message: "user with mobile number not found"});
     // };

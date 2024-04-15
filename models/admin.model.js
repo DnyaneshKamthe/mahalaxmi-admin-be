@@ -11,6 +11,7 @@ const adminSchema = new mongoose.Schema({
     },
     availableCoinsToDistribute: {
         type: Number,
+        default:0,
     },
     password: {
         type: String,
