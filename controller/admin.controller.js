@@ -17,18 +17,21 @@ const getOtp = async (req, res) => {
       return res.status(400).json({ status: 400, message: "mobile number is required" });
     };
 
-    const user = await AdminModel.findOne({ mobileNumber: mobileNumber, password: password });
+    const admin = await AdminModel.findOne({ mobileNumber: mobileNumber });
+   
     // if (!user) {
     //     return res.status(404).json({ status: 404, message: "user with mobile number not found"});
     // };
     // const otp = 1122;
     const otp = Math.floor(1000 + Math.random() * 9000);
-    user.otp = otp;
-    await user.save();
+  
+    admin.otp = otp;
+    await admin.save();
 
      // process to send otp on user mobile
     const message = `Dear customer, your OTP for Login is ${otp} Use this password to validate your login. Shree Ji Traders`;
     const apiUrl = `${process.env.API_URL}&apikey=${process.env.API_KEY}&apirequest=Text&sender=${process.env.SENDER_ID}&mobile=${mobileNumber}&message=${message}&route=OTP&TemplateID=${process.env.TEMPLATE_ID}&format=JSON`;
+  
     const response = fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
