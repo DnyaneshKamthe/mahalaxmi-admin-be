@@ -129,11 +129,7 @@ const acceptRequestAndTransferAmount = async (req, res) => {
       return res.status(404).json({ status: 404, message: "user not found"});
     };
     const amount = parseInt(requestedAmount);
-    if (amount > userMaster.coins) {
-      return res.status(400).json({ status: 400, message: "requested amount is greater than users coins" });
-    };
     userMaster.requestedAmount = 0
-    userMaster.coins -= amount
     await userMaster.save();
 
     const admin = await AdminModel.findOne();

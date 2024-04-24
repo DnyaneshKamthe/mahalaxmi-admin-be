@@ -158,8 +158,10 @@ const withDrawAmount = async (req, res) => {
     if (requestedAmount > userMaster.coins) {
       return res.status(400).json({ status: 400, message: "requested withdraw amount is greater than actual coins" })
     };
+    const amount = parseInt(requestedAmount);
     userMaster.upiId = upiId
     userMaster.requestedAmount = requestedAmount
+    userMaster.coins -= amount
     await userMaster.save();
 
     return res.status(200).json({ status: 200, message: "with draw request sent successfully", userMaster: userMaster });
