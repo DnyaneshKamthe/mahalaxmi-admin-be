@@ -142,6 +142,32 @@ const acceptRequestAndTransferAmount = async (req, res) => {
   }
 };
 
+const cancelRequestAndCreditCoins = async (req, res) => {
+  try {
+    const { mobileNumber, requestedAmount } = req.body;
+    
+    if (!mobileNumber) {
+      return res.status(400).json({ status: 400, message: "mobile Number is required" });
+    };
+    if (!requestedAmount) {
+      return res.status(400).json({ status: 400, message: "requested Amount is required" });
+    };
+    const userMaster = await UserMasterModel.findOne({ mobileNumber: mobileNumber });
+    if (!userMaster) {
+      return res.status(404).json({ status: 404, message: "user not found"});
+    };
+    const amount = parseInt(requestedAmount);
+    userMaster.coins += amount;
+    userMaster.requestedAmount = 0
+    await userMaster.save();
+
+
+    return res.status(200).json({ status:200, message: "withdraw request cancelled"});
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 const getWithDrawAmountRequests = async (req, res) => {
   try {
     const userMasters = await UserMasterModel.find({ requestedAmount: { $gt: 0 } });
@@ -200,6 +226,7 @@ module.exports = {
   changePassword,
   signIn,
   acceptRequestAndTransferAmount,
+  cancelRequestAndCreditCoins,
   getWithDrawAmountRequests,
   getPayments,
   addAvailableCoins,
